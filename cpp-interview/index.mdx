@@ -1,0 +1,72 @@
+---
+title: C++ 面试知识图谱 (终极版：一题一文)
+description: C++ 面试知识图谱 (终极版：一题一文)
+---
+
+### C++ 面试知识图谱 (终极版：一题一文) 🗺️✍️
+
+欢迎来到 C++ 面试冲刺中心！🚀
+
+这份终极版大纲将每一个高频面试题都视为一个独立的学习单元，并链接到专属的深度解析文章。请点击你感兴趣的任何问题，开始逐个击破吧！
+
+---
+
+### 🔥 P0: C++ 核心语言 (基础送分题，也是送命题)
+
+- **内存管理与指针**
+  - [> "堆和栈有什么区别？它们的生命周期、空间大小、分配效率有何不同？"](./heap-vs-stack)
+  - [> "`new` 和 `malloc` 有什么区别？`delete` 和 `free` 呢？"](./new-vs-malloc)
+  - [> "指针和引用有什么区别？在函数传参时，你更倾向于用哪个？"](./pointer-vs-reference)
+  - [> "讲讲 `const` 关键字的用法，特别是 `const` 指针。"](./const-keyword)
+  - [> "`static` 关键字在不同场景下的作用是什么？"](./static-keyword)
+  - [> "什么是野指针和悬挂指针？你是如何避免的？"](./pointers-wild-and-dangling)
+
+- **面向对象基础**
+  - [> "`struct` 和 `class` 的核心区别是什么？"](./struct-vs-class)
+  - [> "简单讲一下 C++ 的多态是如何实现的？"](./polymorphism-intro)
+  - [> "为什么基类的析构函数通常要声明为虚函数？"](./virtual-destructor)
+  - [> "构造函数可以是虚函数吗？为什么？"](./virtual-constructors)
+  - [> "函数重载（Overload）和函数重写（Override）有什么区别？"](./overload-vs-override)
+
+---
+
+### 🎯 P1: 进阶核心 (展现深度与广度)
+
+- **深入面向对象**
+  - [> "什么时候我们必须自定义拷贝构造函数？"](./copy-constructor)
+  - [> "请解释一下 C++ 的“三/五法则” (Rule of Three/Five)。"](./rule-of-three-five)
+  - [> "介绍一下虚函数表（v-table）的内部机制。"](./vtable)
+  - [> "什么是纯虚函数？它有什么作用？"](./pure-virtual-functions)
+
+- **STL 标准模板库**
+  - [> "`std::vector` 的实现原理与动态扩容机制。"](./stl-vector)
+  - [> "`std::map` 和 `std::unordered_map` 的底层实现与场景对比。"](./map-vs-unordered-map)
+  - [> "在遍历 `std::vector` 时正确删除元素的方式。"](./vector-erase)
+  - [> "什么是迭代器失效？哪些操作会导致迭代器失效？"](./iterator-invalidation)
+
+---
+
+### ⭐ P2: 现代 C++ 与并发 (体现技术视野)
+
+- **现代 C++ 核心**
+  - [> "什么是 RAII？它是如何帮助我们进行资源管理的？"](./raii)
+  - [> "介绍 `std::unique_ptr` 的特点和用法。"](./unique_ptr)
+  - [> "介绍 `std::shared_ptr` 的实现原理（引用计数）。"](./shared_ptr)
+  - [> "如何用 `std::weak_ptr` 解决 `shared_ptr` 的循环引用问题？"](./weak_ptr)
+  - [> "你如何理解右值引用？`std::move` 做了什么？"](./rvalue-references-move-semantics)
+  - [> "Lambda 表达式的语法和捕获方式。"](./lambda-expressions)
+
+- **并发编程入门**
+  - [> "如何在 C++ 中创建线程并管理其生命周期？"](./std-thread)
+  - [> "`mutex` 是什么？`lock_guard` 和 `unique_lock` 有什么区别？"](./mutex-and-locks)
+  - [> "如何使用 `condition_variable` 实现线程同步？"](./condition-variable)
+
+---
+
+### 🔧 P3: 工程与设计 (考察综合素养)
+
+- **工程实践**
+  - [> "简述从 `.cpp` 源文件到可执行文件的完整过程。"](./compilation-linking)
+  - [> "静态链接和动态链接有什么区别？"](./static-vs-dynamic-linking)
+  - [> "你了解哪些设计模式？请实现一个线程安全的单例模式。"](./design-patterns-singleton)
+  - [> "你在项目中是如何进行调试的？"](./debugging-techniques)

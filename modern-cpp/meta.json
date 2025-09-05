@@ -1,0 +1,7 @@
+{
+  "root": true,
+  "title": "现代 C++",
+  "description": "现代 C++ 学习专栏",
+  "icon": "Shapes",
+  "pages": ["index", "cpp11", "cpp14", "cpp17", "cpp20"]
+}
