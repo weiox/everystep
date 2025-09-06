@@ -20,20 +20,24 @@
 我们的教程就像一张寻宝图，每个板块都是一个新大陆，等你来探索！
 
 ### 🧭 [C++ 基础](./cpp-basics/)
+
 > 万丈高楼平地起，C++ 的摩天大厦也需要坚实的地基！这里是你的起点，稳扎稳打，才能走得更远。
 
 - [文件 I/O 与 RAII 资源管理](./cpp-basics/file-io-raii.mdx) 📄
 - 更多宝藏正在挖掘中... 🚧
 
 ### 🚀 [现代 C++](./modern-cpp/)
+
 > 坐上时光机，从 C++11 的文艺复兴，一路飙到 C++26 的科幻未来！
 
 #### C++11: 文艺复兴与工业革命 🎨🏭
+
 - [默认与删除函数](./modern-cpp/cpp11/default-delete-functions.mdx)
 - [枚举类](./modern-cpp/cpp11/enum-class.mdx)
 - [explicit 关键字](./modern-cpp/cpp11/explicit-keyword.mdx)
 
 #### C++17: 军火库大扩充 🧰📦
+
 - [std::any - 类型安全的万能容器](./modern-cpp/cpp17/any.mdx)
 - [文件系统库](./modern-cpp/cpp17/filesystem.mdx)
 - [std::optional - 优雅处理空值](./modern-cpp/cpp17/optional.mdx)
@@ -41,17 +45,21 @@
 - [std::variant - 类型安全的联合体](./modern-cpp/cpp17/variant.mdx)
 
 #### C++20: 迈入科幻时代 🚀🌌
+
 - [std::format - 现代字符串格式化](./modern-cpp/cpp20/format.mdx)
 - [模块系统](./modern-cpp/cpp20/modules.mdx)
 - [std::span - 安全的数组视图](./modern-cpp/cpp20/span.mdx)
 
 #### 内部机制探索 🔍
+
 - [字符串实现原理](./modern-cpp/internals/string-implementation.mdx)
 
 ### 🎯 [C++ 面试知识图谱](./cpp-interview/)
+
 > 你的面试“通关秘籍”！我们把经典面试题掰开了、揉碎了，一题一文，带你逐个击破！
 
 #### 🔥 P0: C++ 核心语言
+
 - [堆和栈有什么区别？](./cpp-interview/heap-vs-stack.mdx)
 - [new 和 malloc 有什么区别？](./cpp-interview/new-delete-malloc-free.mdx)
 - [指针和引用有什么区别？](./cpp-interview/pointer-vs-reference.mdx)
@@ -61,16 +69,19 @@
 - [野指针和悬挂指针](./cpp-interview/pointers-wild-and-dangling.mdx)
 
 ### 🎙️ [C++ 面试真题](./cpp-real-interviews/)
+
 > 理论与实战的终极考场！这里汇集了来自社区的真实面经，带你直击各大厂面试现场。
 
 - [如何贡献你的面经？](./cpp-real-interviews/README.mdx) ✍️
 
 ### 📐 [C++ 核心指导原则](./cpp-core-guidelines/)
+
 > 这不仅仅是代码规范，更是 C++ 大师们的编程哲学。让我们站在巨人的肩膀上写代码！
 
 - [I.1: 让接口显式化](./cpp-core-guidelines/i1-make-interfaces-explicit.mdx)
 
 ### 💭 [编程人生](./programming-life/)
+
 > 写代码久了，也别忘了抬头看看天。这里有技术之外的思考与感悟，和你聊聊诗和远方。
 
 - [AI 时代下的经典书籍价值](./programming-life/ai-and-classic-books.mdx)
@@ -86,7 +97,7 @@
 
 ## 🚀 如何开卷？
 
-所有教程都已开源，你可以直接在 GitHub 上阅读这些 Markdown 文件。为了获得最佳阅读体验，我们更推荐你访问我们的在线文档网站（链接待补充）。
+所有教程都已开源，你可以直接在 GitHub 上阅读这些 Markdown 文件。为了获得最佳阅读体验，我们更推荐你访问我们的在线文档网站：[everystepdev.com](https://everystepdev.com)。
 
 ## 🤝 一起来玩！
 
