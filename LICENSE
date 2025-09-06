@@ -1,0 +1,84 @@
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+
+Copyright (c) 2024 Everystep Team
+
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 
+International License. To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to 
+Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+===============================================================================
+                            EVERYSTEP C++ 教程文档
+                              版权保护声明
+===============================================================================
+
+本文档库包含 Everystep C++ 教程的所有原创教学内容，包括但不限于：
+- C++ 基础教程
+- 现代 C++ 特性讲解  
+- C++ 面试知识图谱
+- C++ 核心指导原则
+- 编程人生思考
+
+🚫 禁止用途：
+- 商业培训机构直接使用或改编本内容进行盈利
+- 将本内容整体或大量复制到其他教学平台
+- 在未标注来源的情况下使用本内容
+- 将本内容用于AI训练数据集（未经授权）
+
+✅ 允许用途：
+- 个人学习和研究使用
+- 教育机构的非营利教学使用（需标注来源）
+- 在遵循CC BY-NC-SA 4.0协议下的分享和改编
+
+📋 使用要求：
+1. **署名（Attribution）**：必须标注原作者和来源链接
+   - 来源：Everystep C++ 教程 (https://github.com/weiox/everystep-fe)
+   - 作者：Everystep Team
+
+2. **非商业（NonCommercial）**：不得用于商业目的
+   - 个人博客分享 ✅
+   - 开源项目引用 ✅  
+   - 培训机构商用 ❌
+   - 付费课程使用 ❌
+
+3. **相同方式共享（ShareAlike）**：改编作品必须使用相同许可证
+   - 基于本内容的衍生作品必须同样采用 CC BY-NC-SA 4.0
+
+===============================================================================
+                              版权侵权处理
+===============================================================================
+
+如发现以下行为，我们将采取法律行动：
+- 未经授权的商业使用
+- 大量复制内容且未标注来源
+- 恶意抄袭和剽窃
+- 违反 CC BY-NC-SA 4.0 协议的行为
+
+举报邮箱：请通过 GitHub Issues 联系我们
+
+===============================================================================
+                                免责声明
+===============================================================================
+
+本教程内容仅供学习参考，作者不对因使用本内容而产生的任何直接或间接损失承担责任。
+C++ 标准在不断演进，部分内容可能存在时效性，请以官方文档为准。
+
+===============================================================================
+
+You are free to:
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+- Attribution — You must give appropriate credit, provide a link to the license, 
+  and indicate if changes were made.
+- NonCommercial — You may not use the material for commercial purposes.
+- ShareAlike — If you remix, transform, or build upon the material, you must 
+  distribute your contributions under the same license as the original.
+
+No additional restrictions — You may not apply legal terms or technological 
+measures that legally restrict others from doing anything the license permits.
+
+===============================================================================
+最后更新：2024年1月
+===============================================================================
