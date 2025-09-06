@@ -1,6 +1,6 @@
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 
-Copyright (c) 2024 Everystep Team
+Copyright (c) 2024 everystep Team
 
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 
 International License. To view a copy of this license, visit 
@@ -8,11 +8,11 @@ http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to
 Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 ===============================================================================
-                            EVERYSTEP C++ 教程文档
+                            everystep C++ 教程文档
                               版权保护声明
 ===============================================================================
 
-本文档库包含 Everystep C++ 教程的所有原创教学内容，包括但不限于：
+本文档库包含 everystep C++ 教程的所有原创教学内容，包括但不限于：
 - C++ 基础教程
 - 现代 C++ 特性讲解  
 - C++ 面试知识图谱
@@ -32,8 +32,8 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 📋 使用要求：
 1. **署名（Attribution）**：必须标注原作者和来源链接
-   - 来源：Everystep C++ 教程 (https://github.com/weiox/everystep-fe)
-   - 作者：Everystep Team
+   - 来源：everystep C++ 教程 (https://github.com/weiox/everystep)
+   - 作者：everystep Team
 
 2. **非商业（NonCommercial）**：不得用于商业目的
    - 个人博客分享 ✅
@@ -80,5 +80,5 @@ No additional restrictions — You may not apply legal terms or technological
 measures that legally restrict others from doing anything the license permits.
 
 ===============================================================================
-最后更新：2024年1月
+最后更新：2025年9月
 ===============================================================================
