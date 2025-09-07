@@ -1,0 +1,7 @@
+{
+  "root": true,
+  "title": "C++ 面试指南",
+  "description": "精选 C++ 面试题，深入剖析核心知识点",
+  "icon": "Shapes",
+  "pages": ["index", "baidu-backend-20240524"]
+}

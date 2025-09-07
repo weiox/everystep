@@ -1,0 +1,7 @@
+{
+  "root": true,
+  "title": "C++ Core Guidelines",
+  "description": "C++ Core Guidelines 解读",
+  "icon": "BookCheck",
+  "pages": ["index", "i1-make-interfaces-explicit"]
+}

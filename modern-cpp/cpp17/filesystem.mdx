@@ -1,0 +1,351 @@
+---
+title: filesystem
+description: C++17 <filesystem> 详解：从此告别平台相关的头文件和宏，用现代 C++ 的方式优雅地操作文件与目录。
+---
+
+### 梦回蛮荒时代... 🦖
+
+在 C++17 的曙光照耀大地之前，只要你的 C++ 程序想和文件系统打个交道——哪怕只是想看看某个目录下有哪些文件——都得立刻面对一个残酷的现实：**C++ 标准库里，没有这个功能！**
+
+这听起来很不可思议，但事实就是如此。开发者们被迫"穿越"回 C 语言时代，用操作系统提供的最原始、最不一致的 API 来完成任务。具体来说，你至少会遇到三大难题：
+
+1.  **API 大分裂** 🔀：在 Windows 上，你得引入 `windows.h`，学习一套名为 `FindFirstFile`、`FindNextFile` 的 API；而在 Linux 或 macOS 上，你又得换成 `dirent.h` 和 `unistd.h`，使用另一套风格迥异的 `opendir`、`readdir` 函数。
+
+2.  **路径分隔符之战** ⚔️：Windows 认 `\`，而 Unix-like 系统认 `/`。这意味着，你硬编码一个路径字符串，你的程序就立刻失去了跨平台能力。为了拼接路径，你不得不写下大量恶心的宏和条件编译。
+
+3.  **原始的字符串体操** 🤸‍♂️：想从一个路径里提取文件名？或者获取文件的扩展名？对不起，标准库没提供这种"高级功能"。你只能自己上阵，手写各种 `find_last_of` 和 `substr`，过程繁琐，且极易因边界情况而出错。
+
+为了让没有经历过那个时代的朋友们能有更直观的感受，我们来看一段典型的"史前"代码。它的目标仅仅是写一个简单的"查找配置文件"功能：
+
+```c
+#ifdef _WIN32
+  // 各种 Windows.h 里的天书... FindFirstFile, FindNextFile...
+#else
+  // 各种 unistd.h 里的咒语... opendir, readdir...
+#endif
+```
+
+那感觉，就像是想吃个三明治，却得先学会自己种小麦、养牛、烤面包一样心累。C++ 标准库曾经在这方面像个"偏科生"，造出了各种高精尖的模板武器，却连家门口的路（文件系统）都认不清楚。
+
+**不过，好消息是，C++17 骑着一匹名叫 `<filesystem>` 的白色骏马，驰骋而来，拯救了我们！** 🦸‍♂️
+
+它带来了一套统一的、优雅的、跨平台的"导航系统"，让咱们跟文件系统打交道，从此变得像呼吸一样自然。准备好了吗？系好安全带，我们马上发车，去探索这个现代 C++ 的奇妙世界！👇
+
+### 一段"好事多磨"的上位史 📜
+
+你可能会好奇，这么一个基础又重要的功能，为什么 C++ 标准委员会这帮大佬们磨叽到了 C++17 才给咱们安排上？问得好！这背后其实是一段长达十几年，堪称"C++ 标准库甄嬛传"的奋斗史。
+
+故事的主角，其实并非凭空出世。它的前身，是 C++ 社区一位德高望重的大神 Beman Dawes 在 Boost 库中开发的 `boost::filesystem`。Boost 库，你可以把它看作是 C++ 标准库的"预备队"或者"试验田"，里面全是些高质量的、待考察的未来之星。
+
+`boost::filesystem` 实在是太好用了，以至于大家伙儿都盼着它能早日"转正"，成为标准库的一员。最初，它被寄予厚望，计划在 C++11 就和大家见面（当时还叫 TR2，技术报告第二版）。
+
+然而，现实是骨感的... 💔 标准化是一个极其严谨（且龟速）的过程。大佬们为了各种细节（比如如何最好地处理 Unicode 路径、如何处理符号链接等）吵得不可开交。于是，它完美错过了 C++11 的班车。
+
+"没关系，我们还有 C++14！" 大家当时都这么想。可惜，因为一些技术细节和设计的反复打磨，它又一次和标准失之交臂... 简直是"起了个大早，赶了个晚集"的典范。
+
+直到 C++17，这位在 Boost 社区服役多年、身经百战、被无数项目验证过的"老兵"，才终于扫清了一切障碍，被正式授予了 `std::` 的荣耀头衔，成为了我们今天看到的 `std::filesystem`！
+
+所以，当你现在轻松地写下 `fs::path` 时，别忘了背后那段漫长而曲折的历史。它的到来，凝聚了无数开发者的智慧、争论和期盼。它是真正的千锤百炼，值得信赖！👍
+
+### 横向对比：我们是唯一的"受害者"吗？🌍
+
+读到这里，你可能会产生一个灵魂拷问：难道就 C++ 程序员这么"苦"吗？别的语言是怎么解决这个问题的？
+
+问得好！坦白说，C++ 在这方面确实是个"晚熟"的孩子。放眼望去，几乎所有主流编程语言，都比 C++ 更早地拥有了原生、跨平台的方案。
+
+- **Python 🐍**：早在 C++ 程序员还在为 `\` 和 `/` 纠结时，Pythonista 们已经用上了 `os.path` 模块。虽然略显古老，但它提供了基本的跨平台路径操作。到了 Python 3.4，更是推出了 `pathlib` 模块，提供了一套优雅的、面向对象的 API，其设计思想和 `std::filesystem` 惊人地相似，可以说是殊途同归。
+
+- **Java ☕**：作为"Write Once, Run Anywhere"的旗手，Java 从诞生第一天（JDK 1.0）起，就内置了 `java.io.File` 类。尽管它的 API 在今天看来有些陈旧（比如，一个 `File` 对象既可以代表文件也可以代表目录），但它确立了一个核心原则：文件系统操作必须是标准库的一部分。后来的 Java 7 推出的 `java.nio.file` 包（NIO.2），更是带来了一套功能强大且设计现代的 API。
+
+- **后起之秀 (Go, Rust, Node.js)** 🚀：Go 语言有 `os` 和 `path/filepath` 包；Rust 有 `std::fs` 和 `std::path`；JavaScript 在 Node.js 的加持下，拥有了功能完备的 `fs` 和 `path` 模块。这些更年轻的语言和平台，从设计之初就吸取了前辈的经验，将强大的文件系统库作为"标配"纳入了标准库。
+
+**那问题来了，为什么 C++ 偏偏慢了这一拍？**
+
+这背后是 C++ 独特的设计哲学和历史包袱：
+
+1.  **"零成本抽象"的执念** ⚡：C++ 标准委员会对任何可能引入性能开销的"高级"抽象都慎之又慎。一个文件系统库，势必要封装大量的系统调用，如何保证其抽象层不会在某些极端场景下成为性能瓶颈？这是一个长期困扰委员会的难题。
+
+2.  **对 C 的兼容与依赖** 🔗：在很长一段时间里，C++ 满足于使用 C 语言的 `<stdio.h>` 来进行文件 _内容_ 的读写。对于文件 _系统_ 的操作，社区似乎形成了一种默契："这属于操作系统的范畴，用平台 API 或者第三方库解决就好"。
+
+3.  **标准化流程的漫长** 🐌：正如前文所述，一个提案要进入 C++ 标准，需要经过千锤百炼和无数轮的讨论。`filesystem` 这种与底层平台紧密耦合的库，其复杂性（如 Unicode 支持、符号链接、错误处理等）更是让这个过程变得异常漫长。
+
+所以，`std::filesystem` 的到来，不仅仅是 C++ "补上了一块短板"。它更标志着 C++ 设计哲学的一种演进：在坚持性能的同时，也开始正视开发者的"幸福感"，愿意提供更多"开箱即用"的现代化工具。我们终于可以像其他语言的开发者一样，享受标准库带来的便利了！
+
+### `std::filesystem::path`：你的路径小管家 🏠
+
+在 `<filesystem>` 的世界里，一切故事都从一个叫做 `path` 的神奇对象开始。
+
+你可别把它当成一个平平无奇的 `std::string`！如果说 `std::string` 是个能装任何文本的普通麻袋，那 `std::filesystem::path` 就是一个专门为路径量身打造的、自带GPS和瑞士军刀的顶级工具箱。
+
+我们先来看看它的第一个超能力：**智能拼接**！
+
+忘了那些手动拼接 `\` 或者 `/` 的痛苦吧。`path` 对象直接重载了 `/` 运算符，让路径组合变得像小学生做算术题一样简单直观。
+
+```cpp
+#include <filesystem>
+#include <iostream>
+
+// 社区约定俗成的玩法，给这个又长又臭的命名空间取个小名
+namespace fs = std::filesystem;
+
+int main() {
+    // 无论你在哪个星球，用 / 就对了！它会帮你搞定一切
+    fs::path home_dir = "/home/user";
+    fs::path config_file = "app.conf";
+
+    // 锵锵！就像拼接乐高一样，轻松加愉快
+    fs::path full_path = home_dir / ".config" / config_file;
+
+    // 在 Windows 上，它会自动变成 "C:\\home\\user\\.config\\app.conf" (假设在C盘)
+    // 在 Linux/macOS 上，就是 "/home/user/.config/app.conf"
+    // .string() 方法可以把它变回我们熟悉的字符串
+    std::cout << "配置文件路径: " << full_path.string() << std::endl;
+}
+```
+
+看到了吗？`path` 对象就是这么贴心，它在底层默默处理了所有平台相关的分隔符。你的代码从此拥有了"世界公民"的身份，走到哪里都能跑！🌍
+
+### 庖丁解牛：把路径切开、揉碎 🔪
+
+`path` 对象的另一个绝活，就是能像顶级大厨一样，把一个复杂的路径"庖丁解牛"，分解成各个有用的部分。
+
+想象一下，你从网上下载了一个文件，路径是 `"C:\\Users\\jiewei\\Downloads\\cool_archive.zip"`。现在我们想对它进行一番"解剖"。
+
+```cpp
+#include <filesystem>
+#include <iostream>
+
+namespace fs = std::filesystem;
+
+int main() {
+    fs::path p = "C:\\Users\\jiewei\\Downloads\\cool_archive.zip";
+
+    // "文件本体叫啥？" -> filename()
+    std::cout << "文件名: " << p.filename() << std::endl;
+    // 输出: "cool_archive.zip"
+
+    // "那...去掉扩展名呢？" -> stem()
+    std::cout << "文件主干(stem): " << p.stem() << std::endl;
+    // 输出: "cool_archive"
+
+    // "扩展名是啥？" -> extension()
+    std::cout << "扩展名: " << p.extension() << std::endl;
+    // 输出: ".zip"
+
+    // "它在哪儿躺着呢？" -> parent_path()
+    std::cout << "父目录: " << p.parent_path() << std::endl;
+    // 输出: "C:\\Users\\jiewei\\Downloads"
+}
+```
+
+有了这些利器，你想换个扩展名（`p.replace_extension(".rar")`），或者在文件名后加个后缀，都只是举手之劳。再也不用写复杂的字符串查找和替换函数了，是不是感觉人生都美好了许多？😊
+
+### 文件系统的福尔摩斯：侦查文件状态 🕵️‍♀️
+
+在对文件或目录动手动脚...啊不，是进行操作之前，我们总得先"踩个点"，了解一下它的基本情况。`<filesystem>` 提供了一系列简单直观的"侦查"函数，让你秒变文件系统的福尔摩斯。
+
+比方说，我们的程序需要读取一个名为 `config.json` 的配置文件。
+
+第一步，我们得先问问："这玩意儿到底存不存在啊？"
+
+```cpp
+#include <filesystem>
+#include <iostream>
+namespace fs = std::filesystem;
+
+int main() {
+    fs::path config_path = "./config.json";
+
+    if (fs::exists(config_path)) {
+        std::cout << "报告长官！发现目标 `config.json`！🕵️‍♀️" << std::endl;
+    } else {
+        std::cout << "emmm... 目标失踪了。是不是该创建一个默认的？🤔" << std::endl;
+        return 1;
+    }
+}
+```
+
+好，既然它存在，那下一个问题是："它到底是个文件还是个目录？" 毕竟，总有那么些小天才，会不小心创建一个叫 `config.json` 的文件夹... 🤦
+
+```cpp
+    // ...接上文
+    if (fs::is_regular_file(config_path)) {
+        std::cout << "是个文件，可以放心读取！📖" << std::endl;
+    } else if (fs::is_directory(config_path)) {
+        std::cout << "天呐！哪个天才把它搞成目录了？！🤯 快去教训他！" << std::endl;
+        return 1;
+    }
+```
+
+确认它是个文件后，我们可能还想知道它有多大，好决定是用小杯还是大杯的缓冲区来读取它。
+
+```cpp
+    // ...再接上文
+    try {
+        auto size = fs::file_size(config_path);
+        std::cout << "文件大小为: " << size << " 字节。嗯，是个胖小子！" << std::endl;
+    } catch (fs::filesystem_error& e) {
+        std::cerr << "糟糕，获取文件大小失败: " << e.what() << std::endl;
+    }
+}
+```
+
+你看，`exists`, `is_regular_file`, `is_directory`, `file_size` 这些函数就像是你的侦查小队，让你的程序在操作文件前做到"知己知彼，百战不殆"。
+
+### 目录大巡游：像逛街一样遍历文件 🚶‍♂️
+
+遍历目录，这绝对是 `<filesystem>` 最能体现其价值的功能之一。
+
+还记得 `opendir`/`readdir` 那套需要手动打开、循环读取、再手动关闭的繁琐流程吗？忘了它吧！在现代 C++ 里，遍历目录就像用 for-each 循环逛一个 `std::vector` 一样惬意。
+
+我们的"导游"就是 `fs::directory_iterator`。它会带你轻松游览指定目录下的每一个项目。
+
+```cpp
+#include <filesystem>
+#include <iostream>
+namespace fs = std::filesystem;
+
+int main() {
+    fs::path current_path = "."; // 就从当前目录开始我们的旅程吧！
+
+    std::cout << "--- 开始巡游当前目录 ---" << std::endl;
+
+    for (const fs::directory_entry& entry : fs::directory_iterator(current_path)) {
+        // directory_entry 是我们的"景点信息牌"，它包含了路径等信息
+        const auto& path = entry.path();
+
+        if (entry.is_directory()) {
+            std::cout << "[D] 发现一个目录: " << path.filename() << std::endl;
+        } else if (entry.is_regular_file()) {
+            std::cout << "[F] 发现一个文件: " << path.filename() << std::endl;
+        }
+    }
+    std::cout << "--- 巡游结束 ---" << std::endl;
+}
+```
+
+这个 `directory_iterator` 导游非常尽职，但他只会带你逛当前这一层"展厅"。如果你想深入所有子目录，进行一场"寻宝探险"，那你需要一位更专业的"探险家"...
+
+### 深度探险：递归遍历的无限魅力 🧗
+
+这位探险家，就是 `fs::recursive_directory_iterator`！
+
+它的用法和 `directory_iterator` 几乎一模一样，但它会自动帮你深入所有子目录，子目录的子目录，子子孙孙无穷匮也... 直到挖出所有宝藏。
+
+让我们来干票大的：写一个函数，在指定的"照片"文件夹里，找出所有 `.jpg` 或 `.png` 格式的图片文件。
+
+```cpp
+#include <filesystem>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+namespace fs = std::filesystem;
+
+std::vector<fs::path> find_all_images(const fs::path& start_dir) {
+    std::vector<fs::path> images;
+
+    if (!fs::exists(start_dir) || !fs::is_directory(start_dir)) {
+        return images; // 目录不存在，直接收队回家
+    }
+
+    // 派出我们的王牌探险家！
+    for (const auto& entry : fs::recursive_directory_iterator(start_dir)) {
+        // 我们只对文件感兴趣，忽略目录
+        if (entry.is_regular_file()) {
+            // 获取小写的扩展名，避免大小写问题
+            std::string ext = entry.path().extension().string();
+            std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+
+            if (ext == ".jpg" || ext == ".png") {
+                images.push_back(entry.path());
+            }
+        }
+    }
+    return images;
+}
+
+int main() {
+    // 假设在你的 "Pictures" 目录下运行
+    auto image_files = find_all_images("./Pictures");
+    std::cout << "找到了 " << image_files.size() << " 张图片！📸" << std::endl;
+    for (const auto& f : image_files) {
+        std::cout << "  -> " << f.string() << std::endl;
+    }
+}
+```
+
+太帅了！仅仅十几行代码，一个功能强大的、跨平台的图片搜索工具就诞生了。这就是现代 C++ 带来的生产力革命！
+
+### 文件操作的"增删改查" 🛠️
+
+光说不练假把式，我们不仅要会"看"，还要会"动手"！`<filesystem>` 当然也提供了一整套创建、复制、移动和删除文件/目录的工具。
+
+**创建目录 (`create_directories`)**
+
+想象一下，你要为你的新项目创建日志文件夹 `./logs/2024/`。如果 `logs` 目录还不存在，直接创建 `2024` 会失败。但 `create_directories` 就像 `mkdir -p` 命令，会自动创建所有缺失的父目录，非常智能！
+
+```cpp
+#include <filesystem>
+#include <iostream>
+namespace fs = std::filesystem;
+
+int main() {
+    fs::path log_dir = "./logs/2024/";
+    if (fs::create_directories(log_dir)) {
+        std::cout << "日志目录创建成功！现在可以开始写日志了。✍️" << std::endl;
+    }
+}
+```
+
+**复制、重命名和删除**
+
+这三项操作也同样简单。我们来模拟一个备份配置文件的流程。
+
+```cpp
+#include <filesystem>
+#include <iostream>
+#include <fstream>
+namespace fs = std::filesystem;
+
+int main() {
+    fs::path source = "./config.json";
+    // 先创建一个假的文件
+    std::ofstream(source) << "{ \"version\": 1 }";
+
+    fs::path backup = "./config.json.bak";
+
+    // 1. 复制文件，做一个备份
+    fs::copy(source, backup, fs::copy_options::overwrite_existing);
+    std::cout << "文件已备份到: " << backup << " (有备无患！)" << std::endl;
+
+    // 2. 重命名备份文件
+    fs::path old_backup = "./config.json.old";
+    fs::rename(backup, old_backup);
+    std::cout << "备份文件已改名为: " << old_backup << std::endl;
+
+    // 3. 删除旧的备份文件
+    if (fs::remove(old_backup)) {
+        std::cout << "旧备份已删除！拜拜～ 👋" << std::endl;
+    }
+}
+```
+
+这些 API 直观又强大，让你的文件管理代码变得前所未有的清晰和安全。
+
+### 总结：拥抱现代，告别历史包袱 🎉
+
+朋友，`std::filesystem` 的到来，绝不仅仅是给 C++ 添加了一个新玩具那么简单。它代表了一种哲学：C++ 正在变得越来越关心我们开发者的"幸福指数"。
+
+所以，下次当你的项目需要和文件系统打交道时，请果断地把那些布满灰尘的 `dirent.h` 和 `windows.h` 请出你的代码库。
+
+大声喊出我们的新口号：
+
+- **要跨平台** 🌍：一份代码，Mac、Windows、Linux 处处运行！
+- **要类型安全** 🛡️：用聪明的 `path` 对象，对裸奔的字符串说不！
+- **要代码清晰** ✨：让代码像诗一样优雅，而不是像咒语一样难懂！
+- **要功能强大** 💪：从路径解析到递归遍历，我们全都要！
+
+是时候了，像一个真正的现代 C++ 程序员一样，与文件系统优雅地共舞吧！🎉
+
+记住，`std::filesystem` 不仅仅是一个库，它是我们告别"蛮荒时代"的通行证，是拥抱现代 C++ 美好生活的开始！🚀

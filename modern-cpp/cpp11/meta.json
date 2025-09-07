@@ -1,0 +1,9 @@
+{
+  "title": "C++11",
+  "pages": [
+    "index",
+    "enum-class",
+    "default-delete-functions",
+    "explicit-keyword"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "root": true,
+  "title": "C++ 基础",
+  "description": "C++ 核心基础概念与编程实践",
+  "icon": "BookOpen",
+  "pages": ["index", "file-io-raii", "string"]
+}
