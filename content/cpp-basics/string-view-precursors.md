@@ -1,6 +1,7 @@
 ---
 title: '`string_view` 现身之前：C++各大门派的“零拷贝”往事'
 description: '在 std::string_view 诞生之前，各大开源库如何解决字符串的“零拷贝”传递问题？深入剖析 Google StringPiece、LevelDB Slice、Qt QStringRef 等经典实现，看懂 C++ 标准演进背后的思想变迁。'
+order: 100
 ---
 
 C++17 空降了一位“武林盟主”—— `std::string_view`，一统字符串视图的江湖。它用几乎零成本的“内力”，化解了函数间传递字符串时的昂贵拷贝，让无数 C++ 程序员如释重负，感觉“泰裤辣”。

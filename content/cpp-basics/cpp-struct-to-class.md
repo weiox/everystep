@@ -1,7 +1,7 @@
 ---
 title: 把 init/free 写进类型，编译器替你收尾。
 description: 站在 C 风格 struct 的视角，理解 C++ 中 struct 和 class 的关系、构造函数与析构函数的基本职责，以及如何用最小的面向对象观念配合 RAII 写出更安全的代码。
-order: 30
+order: 50
 ---
 
 在 C 里，你的人生基本被两件小事反复支配：`init` 和 `free`。
