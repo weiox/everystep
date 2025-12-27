@@ -1,6 +1,6 @@
 ---
 title: 范围 for 循环：C++11 终于让遍历这事像人话
-description: 从迭代器的“仪式感”到 for (auto& x : xs)，范围 for 让遍历更直白，也更容易写对。
+description: '从迭代器的“仪式感”到 for (auto& x : xs)，范围 for 让遍历更直白，也更容易写对。'
 ---
 
 我第一次在代码评审里看到那种 for 循环。
