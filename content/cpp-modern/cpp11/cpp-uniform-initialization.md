@@ -1,6 +1,6 @@
 ---
-title: 花括号这件小事：统一初始化与 std::initializer_list
-description: C++11 想用一对 {} 统一所有初始化，但 std::initializer_list 这位“新同事”有时会抢话筒。搞懂它，你就不怕 vector(10) 和 vector{10} 的差别。
+title: '花括号这件小事：统一初始化与 std::initializer_list'
+description: 'C++11 想用一对 {} 统一所有初始化，但 std::initializer_list 这位“新同事”有时会抢话筒。搞懂它，你就不怕 vector(10) 和 vector{10} 的差别。'
 ---
 
 我很早就认识花括号。
@@ -234,6 +234,25 @@ std::vector<int> b{10};    // 1 个 10
 因为我没预分配。
 
 我变成了真的塞了一个元素。
+
+后来我才学乖。
+
+预分配这件事。
+
+你要的其实是 `reserve`。
+
+```cpp
+std::vector<int> v;
+v.reserve(10);
+```
+
+你如果就是想要 10 个元素。
+
+那就用 `()`。
+
+你如果就是想写一串具体初值。
+
+那就用 `{}`。
 
 你问。
 

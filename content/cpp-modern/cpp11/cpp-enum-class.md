@@ -1,6 +1,6 @@
 ---
-title: enum class：更安全的枚举类型
-description: 告别传统 enum 的作用域污染和隐式转换陷阱，拥抱 C++11 带来的强类型、强作用域的 enum class。
+title: 'enum class：更安全的枚举类型'
+description: '告别传统 enum 的作用域污染和隐式转换陷阱，拥抱 C++11 带来的强类型、强作用域的 enum class。'
 ---
 
 我第一次用 `enum`。

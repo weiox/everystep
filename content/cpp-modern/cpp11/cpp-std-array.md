@@ -1,6 +1,6 @@
 ---
-title: 一段“祖传数组”的翻身仗：std::array 是怎么来的
-description: 从 C 风格数组的指针退化与“丢尺寸”，讲到 boost::array/TR1，再到 C++11 的 std::array：零开销的固定长度容器，写起来更像现代 C++。
+title: '一段“祖传数组”的翻身仗：std::array 是怎么来的'
+description: '从 C 风格数组的指针退化与“丢尺寸”，讲到 boost::array/TR1，再到 C++11 的 std::array：零开销的固定长度容器，写起来更像现代 C++。'
 ---
 
 如果你翻过那本薄薄的《The C Programming Language》。

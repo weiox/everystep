@@ -1,6 +1,6 @@
 ---
- title: lambda 表达式：匿名函数与闭包
- description: C++11 的 lambda 让“临时写个小函数”变成日常操作，也把回调、算法和并发写得更顺手。
+title: 'lambda 表达式：匿名函数与闭包'
+description: 'C++11 的 lambda 让“临时写个小函数”变成日常操作，也把回调、算法和并发写得更顺手。'
 ---
 
 lambda 不是突然冒出来的。

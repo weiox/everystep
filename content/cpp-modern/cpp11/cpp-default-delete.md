@@ -1,7 +1,7 @@
 ---
- title: '= default 和 = delete：驯服编译器的「小脾气」'
- description: 'C++11 用 = default 和 = delete，把“编译器到底替我干了什么”这件事说清楚。'
- order: 1
+title: '= default 和 = delete：驯服编译器的「小脾气」'
+description: 'C++11 用 = default 和 = delete，把“编译器到底替我干了什么”这件事说清楚。'
+order: 1
 ---
 
 我写 C 的那几年。
